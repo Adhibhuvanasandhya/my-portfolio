@@ -1,27 +1,22 @@
-require('dotenv').config(); // Load environment variables
 const express = require('express');
-const mongoose = require('mongoose');
-const nodemailer = require('nodemailer');
 const cors = require('cors');
+const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
 
 // Initialize Express app
 const app = express();
 
 // Middleware
-app.use(express.json()); // Parse incoming JSON payloads
-
 app.use(cors({
-    origin: "https://my-portfolio-frontend-omega.vercel.app", // Your frontend's origin
-    methods: ["GET", "POST", "OPTIONS"], // Include OPTIONS for preflight
-    allowedHeaders: ["Content-Type"], // Specify allowed headers
-    credentials: true, // Include credentials if needed
+    origin: "https://my-portfolio-frontend-omega.vercel.app", // Allow your frontend origin
+    methods: ["GET", "POST", "OPTIONS"], // Allow GET, POST, OPTIONS methods
+    allowedHeaders: ["Content-Type"], // Allow Content-Type header
+    credentials: true, // Allow credentials if needed
 }));
 
-// Handle preflight requests explicitly if needed
-app.options("*", cors());
+app.use(express.json()); // Parse incoming JSON payloads
 
-
-// MongoDB connection
+// MongoDB connection (optional if you are saving messages in MongoDB)
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
@@ -38,7 +33,7 @@ const connectDB = async () => {
 // Call the function to connect to MongoDB
 connectDB();
 
-// Define Message Schema and Model
+// Define Message Schema and Model (optional if saving messages)
 const messageSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
@@ -67,7 +62,7 @@ app.post('/send', async (req, res) => {
     }
 
     try {
-        // Save the message to MongoDB
+        // Save the message to MongoDB (optional)
         const newMessage = new Message({ name, email, message });
         await newMessage.save();
 
@@ -98,5 +93,4 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-    
 });
