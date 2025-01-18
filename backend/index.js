@@ -10,7 +10,14 @@ const projectRoutes = require('./routes/projectRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+
+app.use(cors({
+    origin: 'https://my-portfolio-frontend-omega.vercel.app', // Frontend URL
+    methods: ['GET', 'POST', 'OPTIONS'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    credentials: true, // Include credentials like cookies if needed
+}));
+
 app.use(express.json());  // Parse incoming requests with JSON payloads
 
 // MongoDB connection
