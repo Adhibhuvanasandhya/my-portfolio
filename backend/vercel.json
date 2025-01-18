@@ -24,5 +24,10 @@
         { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
       ]
     }
-  ]
+  ],
+  "env": {
+    "MONGO_URI": "mongodb://localhost:27017/portfolio",
+    "EMAIL_USER": "sandhyaponrajan.l@gmail.com",
+    "EMAIL_PASS": "your_email_password"  // Be sure to replace this with actual sensitive data in Vercel's environment settings.
+  }
 }
