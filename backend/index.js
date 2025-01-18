@@ -1,7 +1,8 @@
+require('dotenv').config(); // Load environment variables
 const express = require('express');
-const cors = require('cors');
-const nodemailer = require('nodemailer');
 const mongoose = require('mongoose');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
 
 // Initialize Express app
 const app = express();
@@ -16,7 +17,8 @@ app.use(cors({
 
 app.use(express.json()); // Parse incoming JSON payloads
 
-// MongoDB connection (optional if you are saving messages in MongoDB)
+
+// MongoDB connection
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
@@ -33,7 +35,7 @@ const connectDB = async () => {
 // Call the function to connect to MongoDB
 connectDB();
 
-// Define Message Schema and Model (optional if saving messages)
+// Define Message Schema and Model
 const messageSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
@@ -62,7 +64,7 @@ app.post('/send', async (req, res) => {
     }
 
     try {
-        // Save the message to MongoDB (optional)
+        // Save the message to MongoDB
         const newMessage = new Message({ name, email, message });
         await newMessage.save();
 
@@ -93,4 +95,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    
 });

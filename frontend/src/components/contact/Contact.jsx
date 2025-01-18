@@ -20,6 +20,7 @@ const Contact = () => {
         e.preventDefault();
         try {
             const response = await fetch('https://my-portfolio-backend-virid.vercel.app/send', {
+                mode: 'no-cors',
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
