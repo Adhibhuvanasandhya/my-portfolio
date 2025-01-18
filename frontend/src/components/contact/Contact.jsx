@@ -20,30 +20,15 @@ const Contact = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const apiUrl = import.meta.env.VITE_API_URL; // Use Vite environment variable
-    if (!apiUrl) {
-        alert('API URL is not defined. Check your environment configuration.');
-        return;
-    }
-
         try {
-            const response = await fetch(`${apiUrl}/contact`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
             });
 
-
-            let data;
-            try {
-                data = await response.json();
-            } catch (jsonError) {
-                throw new Error('Invalid JSON response from server');
-            }
-
+            const data = await response.json();
             setResponseMessage(data.message);
-
-
 
             if (response.ok) {
                 alert('Your message has been sent successfully!'); // Alert for success
@@ -77,26 +62,26 @@ const Contact = () => {
                         <div className='contat-detail'>
                             <img src={location} alt='' /> <p>Porur, Chennai</p>
                         </div>
+                       
 
-
-                    </div>
-                    <div className='contact-links'>
-                        <div className='contact-link'>
-                            <a href="https://www.linkedin.com/in/adhibhuvanasandhya" target="_blank" rel="noopener noreferrer">
-                                <img src={linkedin} alt="LinkedIn" />
-                            </a>
                         </div>
+                        <div className='contact-links'>
                         <div className='contact-link'>
-                            <a href="https://github.com/Adhibhuvanasandhya" target="_blank" rel="noopener noreferrer">
-                                <img src={github} alt="GitHub" />
-                            </a>
-                        </div>
-
+                                <a href="https://www.linkedin.com/in/adhibhuvanasandhya" target="_blank" rel="noopener noreferrer">
+                                  <img src={linkedin} alt="LinkedIn" />
+                                </a>
+                              </div>
+                              <div className='contact-link'>
+                                <a href="https://github.com/Adhibhuvanasandhya" target="_blank" rel="noopener noreferrer">
+                                  <img src={github} alt="GitHub"/>
+                                </a>
+                              </div>
+                        
 
                     </div>
                 </div>
                 <form className='contact-right' onSubmit={handleSubmit}>
-                    {responseMessage && <p className="response-message">{responseMessage} </p>}
+                {responseMessage && <p className="response-message">{responseMessage} </p>}
                     <label>Your Name</label>
                     <input type='text' placeholder='Enter your name' name='name' value={formData.name} onChange={handleChange} />
                     <label>Your Email</label>
@@ -104,11 +89,11 @@ const Contact = () => {
                     <label>Write your message here</label>
                     <textarea name='message' placeholder='Enter your message' value={formData.message} onChange={handleChange}></textarea>
                     <button type='submit' className='contact-submit'>Submit Now</button>
-
+                    
                 </form>
-
+                
             </div>
-
+           
         </div>
     );
 };

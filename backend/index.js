@@ -10,14 +10,7 @@ const projectRoutes = require('./routes/projectRoutes');
 const app = express();
 
 // Middleware
-
-app.use(cors({
-    origin: 'https://my-portfolio-frontend-omega.vercel.app', // Frontend URL
-    methods: ['GET', 'POST', 'OPTIONS'], // Allowed HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    credentials: true, // Include credentials like cookies if needed
-}));
-
+app.use(cors());
 app.use(express.json());  // Parse incoming requests with JSON payloads
 
 // MongoDB connection
@@ -26,8 +19,8 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/contact', contactRoutes);
-app.use('/projects', projectRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/projects', projectRoutes);
 
 // Default route for testing
 app.get('/', (req, res) => {
