@@ -29,24 +29,21 @@ const Contact = () => {
     }
 
     try {
-      // Send the form data to the backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/send`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        alert(data.alert); // Success message
-        setFormData({ name: "", email: "", message: "" }); // Reset form
-      } else {
-        alert(data.alert || "Failed to send email. Please try again later.");
-      }
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/send`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData), // Ensure you pass the correct `formData` object
+        });
+        const data = await response.json();
+        if (response.ok) {
+            alert(data.alert); // Success message
+            setFormData({ name: "", email: "", message: "" }); // Reset form
+        } else {
+            alert(data.alert || 'Failed to send email. Please try again later.');
+        }
     } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred. Please check your connection and try again.");
+        console.error('Error:', error);
+        alert('An error occurred. Please check your connection and try again.');
     }
   };
 

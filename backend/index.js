@@ -8,8 +8,18 @@ const cors = require('cors');
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable Cross-Origin Resource Sharing
 app.use(express.json()); // Parse incoming JSON payloads
+
+app.use(cors({
+    origin: "https://my-portfolio-frontend-omega.vercel.app", // Your frontend's origin
+    methods: ["GET", "POST", "OPTIONS"], // Include OPTIONS for preflight
+    allowedHeaders: ["Content-Type"], // Specify allowed headers
+    credentials: true, // Include credentials if needed
+}));
+
+// Handle preflight requests explicitly if needed
+app.options("*", cors());
+
 
 // MongoDB connection
 const connectDB = async () => {
