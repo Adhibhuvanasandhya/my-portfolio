@@ -19,8 +19,8 @@ mongoose.connect(process.env.MONGO_URI)
     .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use('/api/contact', contactRoutes);
-app.use('/api/projects', projectRoutes);
+app.use('/contact', contactRoutes);
+app.use('/projects', projectRoutes);
 
 // Default route for testing
 app.get('/', (req, res) => {
