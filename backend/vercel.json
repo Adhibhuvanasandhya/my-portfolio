@@ -11,8 +11,11 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/" }
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ],
   "headers": [
     {
@@ -28,6 +31,6 @@
   "env": {
     "MONGO_URI": "mongodb://localhost:27017/portfolio",
     "EMAIL_USER": "sandhyaponrajan.l@gmail.com",
-    "EMAIL_PASS": "fakq rbnh nanx bdzl" 
+    "EMAIL_PASS": "fakq rbnh nanx bdzl"
   }
 }
