@@ -8,42 +8,11 @@ import linkedin from "../../assets/linkedin-logo.png";
 import github from "../../assets/github.png";
 
 const Contact = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-    const [responseMessage, setResponseMessage] = useState('');
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await fetch('https://my-portfolio-backend-virid.vercel.app/send', {
-                mode: 'no-cors',
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                alert(data.alert); // Success message
-                setFormData({ name: "", email: "", message: "" }); // Reset form
-            } else {
-                alert(data.alert || 'Failed to send email. Please try again later.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred. Please check your connection and try again.');
-        }
-    };
 
     return (
         <div id='contact' className='contact'>
             <div className='contact_title'>
-                <h1>Get in touch</h1>
+                <h1 >Get in touch</h1>
                 <img src={theme_pattern} alt='' />
             </div>
             <div className='contact_section'>
@@ -71,35 +40,13 @@ const Contact = () => {
                                 <img src={github} alt="GitHub" />
                             </a>
                         </div>
+                        
                     </div>
+                    <div>
+                        <a href="mailto:sandhyaponrajan.l@gmail.com" className='contact-submit'> Mail connect</a>
+                    </div>
+                    
                 </div>
-                <form className='contact-right' onSubmit={handleSubmit}>
-                    {responseMessage && <p className="response-message">{responseMessage}</p>}
-                    <label>Your Name</label>
-                    <input
-                        type='text'
-                        placeholder='Enter your name'
-                        name='name'
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
-                    <label>Your Email</label>
-                    <input
-                        type='email'
-                        placeholder='Enter your email'
-                        name='email'
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                    <label>Write your message here</label>
-                    <textarea
-                        name='message'
-                        placeholder='Enter your message'
-                        value={formData.message}
-                        onChange={handleChange}
-                    ></textarea>
-                    <button type='submit' className='contact-submit'>Submit Now</button>
-                </form>
             </div>
         </div>
     );
