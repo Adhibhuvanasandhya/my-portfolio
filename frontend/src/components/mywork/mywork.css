@@ -87,12 +87,82 @@
 .github-btn:hover {
     background-color: #555;
 }
+@media (max-width: 1280px) {
+    .mywork {
+        gap: 60px;
+        margin: 60px 120px;
+    }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
+    .mywork-title h1 {
+        font-size: 70px;
+    }
+
+    .mywork_container {
+        grid-template-columns: repeat(3, 2fr); 
+    }
+
+    .work-card img {
+        height: 200px; /* Slightly smaller images */
+    }
+}
+
+/* For 1024px and below */
+@media (max-width: 1024px) {
+    .mywork {
+        gap: 50px;
+        margin: 50px 80px;
+    }
+
+    .mywork-title h1 {
+        font-size: 60px;
+    }
+
+    .mywork_container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for 1024px */
+    }
+
+    .work-card img {
+        height: 200px;
+    }
+
+    .demo-btn, .github-btn {
+        font-size: 12px; /* Smaller buttons */
+    }
+}
+
+/* For 800px and below */
+@media (max-width: 800px) {
     .mywork {
         gap: 40px;
-        align-items: start;
+        align-items: center;
+        margin: 40px 40px;
+    }
+
+    .mywork-title h1 {
+        font-size: 50px;
+    }
+    .mywork-title img{
+        width: 150px;
+    }
+
+    .mywork_container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for 800px */
+    }
+
+    .work-card img {
+        height: 180px; /* Adjust image height for 800px */
+    }
+
+    .demo-btn, .github-btn {
+        font-size: 0.9rem; /* Slightly smaller buttons */
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mywork {
+        gap: 40px;
+        align-items: center;
         margin: 50px 70px;
     }
     .mywork_container {
@@ -100,7 +170,7 @@
     }
 
     .mywork-title h1 {
-        font-size: 50px;
+        font-size: 40px;
         padding: 0;
     }
 
@@ -121,6 +191,6 @@
 
     .demo-btn, .github-btn {
         font-size: 0.8rem; /* Smaller buttons */
-        padding:0;
+        padding:2;
     }
 }
